@@ -44,6 +44,7 @@ play)
 	;;
 search)
 	mpc search any $(echo "$*" | sed 's/[     ][^     ]/ any&/g')
+	;;
 playlist)
 	if [ $# -eq 0 ]
 	then
@@ -61,4 +62,5 @@ help)
 	printf "search\tSearch for a song\n"
 	printf "play\tList songs or select song\n"
 	printf "playlist\tList playlist or select playlist\n"
+	;;
 esac
