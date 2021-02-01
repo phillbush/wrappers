@@ -1,0 +1,5 @@
+#!/bin/sh
+
+rulesdir="${RULESDIR:-$HOME/.config}"
+
+exec lf -command "source $rulesdir/lfrc" $@
