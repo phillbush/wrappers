@@ -1,0 +1,55 @@
+.TH MUS 1
+.SH NAME
+mus \- list and select songs
+.SH SYNOPSIS
+.B mus
+.RI [ command ]
+.RI [ arg ]
+.SH DESCRIPTION
+.B mus
+is a wrapper around mpc.
+It has a few commands, some of them taking an optional argument.
+.PP
+If no command is given,
+.B mus
+displays the currently playing song in a format readable by xnotify(1).
+.PP
+The commands are as follows:
+.TP
+.B toggle
+Toggle play/pause.
+This command takes no argument.
+.TP
+.B stop
+Stop playback.
+This command takes no argument.
+.TP
+.B prev
+Play the previous song in the queue.
+This command takes no argument.
+.TP
+.B next
+Play the next song in the queue.
+This command takes no argument.
+.TP
+.B search
+Search for a song given as argument.
+.TP
+.B play
+If no argument is given, list songs in the queue.
+If a argument is given, play the song specified in the argument.
+.TP
+.B playlist
+If no argument is given, list known playlists.
+If a argument is given, load the playlist specified in the argument.
+.SH ENVIRONMENT
+The following environment variables affect the execution of
+.B mus
+.TP
+.B CACHEDIR
+Path to the user's cache directory.
+.TP
+.B MUSICDIR
+Path to the user's music directory.
+.SH SEE ALSO
+.IR mpc (1)

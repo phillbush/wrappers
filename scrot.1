@@ -1,0 +1,44 @@
+.TH MUS 1
+.SH NAME
+scrot \- take screenshots
+.SH SYNOPSIS
+.B scrot
+.RI [ command ]
+.RI [ file ]
+.SH DESCRIPTION
+.B scrot
+is a wrapper around maim(1).
+It has a few commands, all of them can take a filename ending in .png as optional argument.
+.PP
+If no filename is given,
+.B scrot
+creates a file in the format
+.BR \(dqscrot-YYYY-MM-DD-hhmmss.png\(dq .
+.PP
+If no command is given,
+.B scrot
+takes a screenshot of the current monitor.
+.PP
+At least a command or a filename should be specified.
+.PP
+The commands are as follows:
+.TP
+.B select
+Select a window or a region on the screen to take the screenshot.
+.TP
+.B window
+Take a screenshot of the currently active window.
+It uses xdotool(1) to select the window.
+.TP
+.B monitor
+Take a screenshot of the currently active monitor.
+It uses mmutils(1) to select the monitor.
+.SH ENVIRONMENT
+The following environment variables affect the execution of
+.B scrot
+.TP
+.B TMPDIR
+Path to where the screenshot file must be saved.
+If not specified, use $HOME.
+.SH SEE ALSO
+.IR maim (1)

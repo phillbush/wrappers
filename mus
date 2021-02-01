@@ -1,0 +1,64 @@
+#!/bin/sh
+# mus - wrapper around mpc
+# this file in public domain
+
+musicpath="${MUSICDIR:-$HOME/files/mus}"
+cachedir="${CACHEDIR:-$HOME/.cache}"
+coverfile="$CACHEDIR/cover.png"
+
+notify() {
+	song="$(mpc current -f 'TAG:mpd\t%artist%\t%album%\t[[%title%]|[%name%]|[%file%]]')"
+	if ffmpeg -y -i "$musicpath/$(mpc current -f '%file%')" -f image2 "$coverfile" 2>/dev/null
+	then
+		printf 'IMG:%s\t%s\n' "$coverfile" "$song"
+	else
+		printf '%s\n' "$song"
+	fi
+}
+
+[ $# -eq 0 ] && notify && exit
+
+cmd="$1"
+shift
+
+case "$cmd" in
+toggle)
+	mpc toggle
+	;;
+stop)
+	mpc stop
+	;;
+prev)
+	mpc prev
+	;;
+next)
+	mpc next
+	;;
+play)
+	if [ $# -eq 0 ]
+	then
+		mpc playlist
+	else
+		mpc searchplay any $(echo "$*" | sed 's/[     ][^     ]/ any&/g')
+	fi
+	;;
+search)
+	mpc search any $(echo "$*" | sed 's/[     ][^     ]/ any&/g')
+playlist)
+	if [ $# -eq 0 ]
+	then
+		mpc lsplaylists
+	else
+		mpc clear
+		mpc load "$*"
+	fi
+	;;
+help)
+	printf "toggle\tToggle play/pause\n"
+	printf "stop\tStop playback\n"
+	printf "prev\tPlay the previous song in the queue\n"
+	printf "next\tPlay the next song in the queue\n"
+	printf "search\tSearch for a song\n"
+	printf "play\tList songs or select song\n"
+	printf "playlist\tList playlist or select playlist\n"
+esac

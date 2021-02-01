@@ -1,0 +1,29 @@
+#!/bin/sh
+
+delay=3
+tmpdir="${TMPDIR:-$HOME}"
+
+notify() {
+	echo "taking screenshot in 3..2..1.."
+}
+
+case $1 in
+select)
+	shift
+	file="${*:-tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
+	exec maim -d $delay -s "$file" | ifne notify &
+	;;
+window)
+	shift
+	file="${*:-tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
+	exec maim -d $delay -i $(xdotool getactivewindow) "$file" | notify &
+	;;
+monitor)
+	shift
+	file="${*:-tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
+	exec maim -d $delay -g $(mattr -g $(pfm)) "$file" | notify &
+	;;
+*.png)
+	exec maim -d $delay -g $(mattr -g $(pfm)) "$tmpdir/$1" | notify &
+	;;
+esac

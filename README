@@ -1,0 +1,52 @@
+                                wrappers
+
+This is a set of POSIX scripts that implement some handy wrappers for
+various programs.  Each script has its respective manual page.
+
+The scripts are the following.
+• img:      Wrapper around sxiv(1) to use thumbnail view.
+• mus:      Wrapper around mpc(1) to select and play songs.
+• scrot:    Wrapper around maim(1) to take screenshots.
+
+
+§ Installation
+
+The following lists the dependencies each script has.
+• img:      sxiv(1).
+• mus:      mpd(1), mpc(1).
+• scrot:    mmutils(1), xdotool(1), maim(1).
+
+First, edit ./config.mk to match your local setup.
+
+Since these are just script, they do not need to be built.
+
+By default, the scripts are installed into the /usr/local prefix.  Enter
+the following command to install them (if necessary as root).  This
+command installs the scripts into the ${PREFIX}/bin/ directory, and the
+manual pages into the ${MANPREFIX}/man1/ directory.
+
+	make install
+
+
+§ Usage
+
+img(1) opens a image with sxiv(1).  It then lists all files in the same
+directory in a thumbnail view mode.  You can also use this script to
+open a directory, in which case all the image files in it will be listed
+in the thumbnail view mode.
+
+mus(1) takes a command to select or display songs or playlists.  For
+example, `mus next` plays the next song in the queue. `mus play` lists
+the songs in the queue or play a given song. `mus playlist` lists the
+playlists or load a given playlist.
+
+scrot(1) takes a command to take screenshot.  `scrot monitor` takes a
+screenshot of the monitor; `scrot window` takes a screenshot of the
+window; and `scrot select` takes a screenshot of a selected area.
+
+
+§ License
+
+Except for img(1) (which was copied from the ranger file manager), all
+the scripts are in public domain.  All the scripts are provided AS IS,
+with NO WARRANTY.
