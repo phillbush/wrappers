@@ -26,4 +26,9 @@ monitor)
 *.png)
 	exec maim -d $delay -g $(mattr -g $(pfm)) "$tmpdir/$1" | notify &
 	;;
+help)
+	printf 'select\tTake screenshot of selected region\n'
+	printf 'window\tTake screenshot of active window\n'
+	printf 'monitor\tTake screenshot of active monitor\n'
+	;;
 esac
