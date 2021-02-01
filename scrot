@@ -3,28 +3,24 @@
 delay=3
 tmpdir="${TMPDIR:-$HOME}"
 
-notify() {
-	echo "taking screenshot in 3..2..1.."
-}
-
 case $1 in
 select)
 	shift
-	file="${*:-tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
-	exec maim -d $delay -s "$file" | ifne notify &
+	file="${*:-$tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
+	maim -d $delay -s "$file" 2>/dev/null && echo "screenshot taken"
 	;;
 window)
 	shift
-	file="${*:-tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
-	exec maim -d $delay -i $(xdotool getactivewindow) "$file" | notify &
+	file="${*:-$tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
+	maim -d $delay -i $(xdotool getactivewindow) "$file" 2>/dev/null && echo "screenshot taken"
 	;;
 monitor)
 	shift
-	file="${*:-tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
-	exec maim -d $delay -g $(mattr -g $(pfm)) "$file" | notify &
+	file="${*:-$tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
+	maim -d $delay -g $(mattr -g $(pfm)) "$file" 2>/dev/null && echo "screenshot taken"
 	;;
 *.png)
-	exec maim -d $delay -g $(mattr -g $(pfm)) "$tmpdir/$1" | notify &
+	maim -d $delay -g $(mattr -g $(pfm)) "$tmpdir/$1" 2>/dev/null && echo "screenshot taken"
 	;;
 help)
 	printf 'select\tTake screenshot of selected region\n'
