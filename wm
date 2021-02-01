@@ -6,7 +6,7 @@ move|resize)
 	wmctrl -r :ACTIVE: -e $g
 	;;
 close)
-	wmctrl -r :ACTIVE: -c
+	wmctrl -c :ACTIVE:
 	;;
 minimize)
 	wmctrl -r :ACTIVE: -b add,hidden
