@@ -8,6 +8,7 @@ The scripts are the following.
 • img:      Wrapper around sxiv(1) to use thumbnail view.
 • mus:      Wrapper around mpc(1) to select and play songs.
 • scrot:    Wrapper around maim(1) to take screenshots.
+• wm:       Wrapper around wmctrl(1) to manage the active window.
 
 
 § Installation
@@ -17,6 +18,7 @@ The following lists the dependencies each script has.
 • img:      sxiv(1).
 • mus:      mpd(1), mpc(1).
 • scrot:    mmutils(1), xdotool(1), maim(1).
+• wm:       wmctrl(1)
 
 First, edit ./config.mk to match your local setup.
 
@@ -47,6 +49,10 @@ playlists or load a given playlist.
 scrot(1) takes a command to take screenshot.  `scrot monitor` takes a
 screenshot of the monitor; `scrot window` takes a screenshot of the
 window; and `scrot select` takes a screenshot of a selected area.
+
+wm(1) control the active window.  `wm minimize` minimize the active
+window.  `wm maximize` maximize the active window.  `wm close` close the
+active window.  `wm move` move and resize the active window with slop(1).
 
 
 § License

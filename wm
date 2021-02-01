@@ -1,0 +1,24 @@
+#!/bin/sh
+
+case $1 in
+move|resize)
+	g="$(slop -f "0,%x,%y,%w,%h")"
+	wmctrl -r :ACTIVE: -e $g
+	;;
+close)
+	wmctrl -r :ACTIVE: -c
+	;;
+minimize)
+	wmctrl -r :ACTIVE: -b add,hidden
+	;;
+maximize)
+	wmctrl -r :ACTIVE: -b add,maximized_horz,maximized_vert
+	;;
+help)
+	printf 'move\tMove and resize window\n'
+	printf 'resize\tMove and resize window\n'
+	printf 'close\tClose window\n'
+	printf 'minimize\tMinimize window\n'
+	printf 'maximize\tMaximize window\n'
+	;;
+esac
