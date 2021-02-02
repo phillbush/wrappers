@@ -29,7 +29,7 @@ stop)
 	mpc stop
 	;;
 prev)
-	mpc prev
+	mpc cdprev
 	;;
 next)
 	mpc next
