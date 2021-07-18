@@ -17,6 +17,8 @@
 # not work in dash and others), so we cannot store the result of listfiles to a
 # variable.
 
+cmd="sxiv -ab"
+
 if [ $# -eq 0 ]; then
     echo "Usage: ${0##*/} PICTURES"
     exit
@@ -41,7 +43,7 @@ target="$(abspath "$1")"
 count="$(listfiles | fgrep -m 1 -n "$target" | cut -d: -f1)"
 
 if [ -n "$count" ]; then
-    listfiles | tr '\n' '\0' | exec xargs -0 sxiv -n "$count" --
+    listfiles | tr '\n' '\0' | exec xargs -0 $cmd -n "$count" --
 else
-    exec sxiv -- "$@" # fallback
+    exec $cmd -- "$@" # fallback
 fi

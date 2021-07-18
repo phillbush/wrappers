@@ -2,27 +2,10 @@
 # mus - wrapper around mpc
 # this file in public domain
 
-musicdir="${MUSICDIR:-$HOME/files/mus}"
-cachedir="${CACHEDIR:-$HOME/.cache}"
-coverfile="$CACHEDIR/cover.png"
-
-notify() {
-	song="$(mpc current -f 'TAG:mpd\t%artist%\t%album%\t[[%title%]|[%name%]|[%file%]]')"
-	if ffmpeg -y -i "$musicdir/$(mpc current -f '%file%')" -f image2 "$coverfile" 2>/dev/null
-	then
-		printf 'IMG:%s\t%s\n' "$coverfile" "$song"
-	else
-		printf '%s\n' "$song"
-	fi
-}
-
-[ $# -eq 0 ] && notify && exit
-
 cmd="$1"
 shift
-
 case "$cmd" in
-toggle)
+toggle|pause)
 	mpc toggle
 	;;
 stop)
@@ -37,6 +20,7 @@ next)
 play)
 	if [ $# -eq 0 ]
 	then
+		mpc play
 		mpc playlist
 	else
 		mpc searchplay any $(echo "$*" | sed 's/[     ][^     ]/ any&/g')

@@ -4,6 +4,7 @@ all:
 	@echo no need to build
 
 install:
+	install -D -m 755 0x0       ${DESTDIR}${PREFIX}/bin/0x0
 	install -D -m 755 fm        ${DESTDIR}${PREFIX}/bin/fm
 	install -D -m 755 img       ${DESTDIR}${PREFIX}/bin/img
 	install -D -m 755 scrot     ${DESTDIR}${PREFIX}/bin/scrot
@@ -15,6 +16,7 @@ install:
 	install -D -m 644 wm.1      ${DESTDIR}${MANPREFIX}/man1/wm.1
 
 uninstall:
+	rm -f ${DESTDIR}${PREFIX}/bin/0x0
 	rm -f ${DESTDIR}${PREFIX}/bin/fm
 	rm -f ${DESTDIR}${PREFIX}/bin/img
 	rm -f ${DESTDIR}${PREFIX}/bin/scrot

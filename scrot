@@ -7,20 +7,20 @@ case $1 in
 select)
 	shift
 	file="${*:-$tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
-	maim -d $delay -s "$file" 2>/dev/null && echo "screenshot taken"
+	maim -d $delay -s "$file" 2>/dev/null && exit 0
 	;;
 window)
 	shift
 	file="${*:-$tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
-	maim -d $delay -i $(xdotool getactivewindow) "$file" 2>/dev/null && echo "screenshot taken"
+	maim -d $delay -i $(xdotool getactivewindow) "$file" 2>/dev/null && exit 0
 	;;
 monitor)
 	shift
 	file="${*:-$tmpdir/scrot-$(date +%Y-%m-%d-%H%M%S).png}"
-	maim -d $delay -g $(mattr -g $(pfm)) "$file" 2>/dev/null && echo "screenshot taken"
+	maim -d $delay -g $(mattr -g $(pfm)) "$file" 2>/dev/null && exit 0
 	;;
 *.png)
-	maim -d $delay -g $(mattr -g $(pfm)) "$tmpdir/$1" 2>/dev/null && echo "screenshot taken"
+	maim -d $delay -g $(mattr -g $(pfm)) "$tmpdir/$1" 2>/dev/null && exit 0
 	;;
 help)
 	printf 'select\tTake screenshot of selected region\n'
@@ -28,3 +28,4 @@ help)
 	printf 'monitor\tTake screenshot of active monitor\n'
 	;;
 esac
+exit 1

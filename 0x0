@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ "$#" -ne 1 ] && exit 1
+curl -F"file=@$1" https://0x0.st
